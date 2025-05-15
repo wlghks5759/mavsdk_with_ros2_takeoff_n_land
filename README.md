@@ -13,7 +13,7 @@
   - micro-ROS 공식 문서를 참고하여 설치하세요.
 
 ### 2. Docker를 통한 체험
-직접 설치가 어려운 경우, Docker를 통해 환경을 체험할 수 있습니다. 이 도커 이미지는 px4 ros2 microXRCE 환경을 지원합니다.
+직접 설치가 어려운 경우, Docker를 통해 환경을 체험할 수 있습니다.
 ```bash
 docker pull holytorch/px4_ros2_mavsdk
 ```
@@ -46,6 +46,51 @@ mavsdk_with_ros2_takeoff_n_land/
 ├── .gitattributes
 └── README.md
 ```
+
+## 🛠️ 사용 방법
+
+1. 위의 사전 요구 사항을 충족하거나 Docker 컨테이너를 실행합니다.
+2. noVNC를 통해 GUI에 접속합니다.
+3. 홈 디렉토리로 이동해 프로젝트 클론:
+   ```bash
+   cd ~
+   git clone https://github.com/wlghks5759/mavsdk_with_ros2_takeoff_n_land.git
+   cd ~/mavsdk_with_ros2_takeoff_n_land
+   colcon build
+   ```
+
+4. 다음 세 개의 터미널에서 각각 실행:
+
+   **첫 번째 터미널 (PX4 시뮬레이터)**
+   ```bash
+   cd ~/PX4-Autopilot
+   px4 make px4_sitl gz_x500
+   ```
+
+   **두 번째 터미널 (Micro-XRCE-DDS Agent)**
+   ```bash
+   cd ~/Micro-XRCE-DDS-Agent
+   MicroXRCEAgent udp4 -p 8888
+   ```
+
+   **세 번째 터미널 (ROS 2 노드)**
+   ```bash
+   cd ~/mavsdk_with_ros2_takeoff_n_land
+   source install/setup.bash
+   ros2 launch takeoff_and_land_ros2 takeoff_land.launch.py
+   ```
+
+5. 다른 연결 URL 사용 방법:
+
+   **시리얼 포트 사용 시** (예: 실제 드론의 시리얼 포트)
+   ```bash
+   ros2 launch takeoff_and_land_ros2 takeoff_land.launch.py connection_url:=serial:///dev/ttyACM0:57600
+   ```
+
+   **TCP 연결 사용 시**
+   ```bash
+   ros2 launch takeoff_and_land_ros2 takeoff_land.launch.py connection_url:=tcp://<DRONE_IP>:5760
+   ```
 
 ## 🛠️ 사용 방법
 
