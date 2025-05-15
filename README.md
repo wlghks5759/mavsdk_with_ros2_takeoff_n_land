@@ -13,7 +13,7 @@
   - micro-ROS 공식 문서를 참고하여 설치하세요.
 
 ### 2. Docker를 통한 체험
-직접 설치가 어려운 경우, Docker를 통해 환경을 체험할 수 있습니다.
+직접 설치가 어려운 경우, Docker를 통해 환경을 체험할 수 있습니다. 이 도커 이미지는 px4 ros2 microXRCE 환경을 지원합니다.
 ```bash
 docker pull holytorch/px4_ros2_mavsdk
 ```
