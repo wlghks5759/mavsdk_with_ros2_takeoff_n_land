@@ -1,6 +1,6 @@
-# ✈️ PX4 + ROS 2 + micro-ROS 통합 프로젝트
+# ✈️ PX4 + ROS 2 + MAVSDK 통합 예제 프로젝트 (ARM + TAKEOFF + LAND)
 
-이 프로젝트는 PX4 Autopilot, ROS 2, micro-ROS를 통합하여 드론의 이륙 및 착륙을 제어하는 데모를 제공합니다. 직접 설치하거나 Docker를 통해 손쉽게 체험할 수 있습니다.
+이 프로젝트는 PX4 Autopilot, ROS 2, micro-ROS를 통합하여 드론의 이륙 및 착륙을 제어하는 데모를 제공합니다. 직접 설치하거나 Docker를 통해 손쉽게 사용할 수 있습니다.
 
 ## 📦 사전 요구 사항
 
@@ -10,10 +10,12 @@
 - **ROS 2**
   - ROS 2 설치 가이드를 따라 설치하세요.
 - **microXRCE**
-  - micro-ROS 공식 문서를 참고하여 설치하세요.
+  - microXRCE 공식 문서를 참고하여 설치하세요.
+- **MAVSDK**
+  - MAVSDK 공식 문서를 참고하여 설치하세요.
 
-### 2. Docker를 통한 체험
-직접 설치가 어려운 경우, Docker를 통해 환경을 체험할 수 있습니다.
+### 2. Docker를 통한 사용
+직접 설치가 어려운 경우, Docker를 통해 환경을 사용할 수 있습니다.
 ```bash
 docker pull holytorch/px4_ros2_mavsdk
 ```
@@ -129,3 +131,5 @@ mavsdk_with_ros2_takeoff_n_land/
    ```bash
    ros2 launch takeoff_and_land_ros2 takeoff_land.launch.py connection_url:=tcp://<DRONE_IP>:5760
    ```
+
+   
