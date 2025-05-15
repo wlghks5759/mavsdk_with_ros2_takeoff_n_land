@@ -41,7 +41,13 @@ http://localhost:6080/vnc.html
 ```
 mavsdk_with_ros2_takeoff_n_land/
 ├── src/
-│   └── ...
+│   └── takeoff_and_land_ros2/
+│       ├── CMakeLists.txt
+│       ├── package.xml
+│       ├── launch/
+│       │   └── takeoff_land.launch.py
+│       └── src/
+│           └── takeoff_and_land_node.cpp
 ├── .gitignore
 ├── .gitattributes
 └── README.md
@@ -50,7 +56,7 @@ mavsdk_with_ros2_takeoff_n_land/
 ## 🛠️ 사용 방법
 
 1. 위의 사전 요구 사항을 충족하거나 Docker 컨테이너를 실행합니다.
-2. noVNC를 통해 GUI에 접속합니다.
+2. (noVNC일경우)noVNC를 통해 GUI에 접속합니다.
 3. 홈 디렉토리로 이동해 프로젝트 클론:
    ```bash
    cd ~
@@ -80,7 +86,39 @@ mavsdk_with_ros2_takeoff_n_land/
    ros2 launch takeoff_and_land_ros2 takeoff_land.launch.py
    ```
 
-5. 다른 연결 URL 사용 방법:
+   **네 번째 터미널 (서비스 호출)**
+   ```bash
+   cd ~/mavsdk_with_ros2_takeoff_n_land
+   source install/setup.bash
+   ```
+
+5. PX4 SITL이 켜진 상태에서 네 번째 터미널에서 다음 ROS 2 서비스 호출 명령들을 순서대로 입력하세요:
+
+   **1단계: 드론 Arm 시키기**
+   ```bash
+   ros2 service call /arm_vehicle std_srvs/srv/Trigger "{}"
+   ```
+   이 명령을 실행하면 첫 번째 터미널(노드 로그가 나오는 곳)에 "Arming..." 같은 메시지가 뜨고, 성공하면 서비스 응답으로 `success: true`가 보일 것입니다. 시뮬레이터의 드론 상태도 Armed로 바뀔 수 있습니다.
+
+   **2단계: 드론 이륙 시키기**
+   Arm이 성공적으로 완료된 후 다음 명령을 실행합니다.
+   ```bash
+   ros2 service call /takeoff_vehicle std_srvs/srv/Trigger "{}"
+   ```
+   첫 번째 터미널에 "Taking off..." 메시지가 뜨고, 시뮬레이터의 드론이 실제로 이륙을 시작해야 합니다. 고도 정보를 보고 싶다면 또 다른 새 터미널에서 다음을 실행할 수 있습니다:
+   ```bash
+   ros2 topic echo /altitude
+   ```
+
+   **3단계: (선택 사항) 잠시 호버링**
+   코드가 자동으로 호버링 후 착륙하는 로직은 서비스 내에 직접적으로 넣지 않았습니다. 이륙 후 잠시 기다렸다가 다음 명령을 실행하세요.
+
+   **4단계: 드론 착륙 시키기**
+   ```bash
+   ros2 service call /land_vehicle std_srvs/srv/Trigger "{}"
+   ```
+
+6. 다른 연결 URL 사용 방법:
 
    **시리얼 포트 사용 시** (예: 실제 드론의 시리얼 포트)
    ```bash
@@ -91,9 +129,3 @@ mavsdk_with_ros2_takeoff_n_land/
    ```bash
    ros2 launch takeoff_and_land_ros2 takeoff_land.launch.py connection_url:=tcp://<DRONE_IP>:5760
    ```
-
-## 🛠️ 사용 방법
-
-1. 위의 사전 요구 사항을 충족하거나 Docker 컨테이너를 실행합니다.
-2. noVNC를 통해 GUI에 접속합니다.
-3. 프로젝트의 src/ 디렉토리에서 데모를 실행합니다.
