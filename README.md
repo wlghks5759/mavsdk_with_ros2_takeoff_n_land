@@ -1,4 +1,4 @@
-# ✈️ PX4 + ROS 2 + MAVSDK 통합 예제 프로젝트 (ARM + TAKEOFF + LAND)
+# ✈️ PX4 + ROS 2 + MAVSDK 간단한 예제 프로젝트 (ARM + TAKEOFF + LAND)
 
 이 프로젝트는 PX4 Autopilot, ROS 2, micro-ROS를 통합하여 드론의 이륙 및 착륙을 제어하는 데모를 제공합니다. 직접 설치하거나 Docker를 통해 손쉽게 사용할 수 있습니다.
 
