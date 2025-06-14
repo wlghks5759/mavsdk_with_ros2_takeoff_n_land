@@ -86,6 +86,7 @@ mavsdk_with_ros2_takeoff_n_land/
    **세 번째 터미널 (ROS 2 노드)**
    ```bash
    cd ~/mavsdk_with_ros2_takeoff_n_land
+   colcon build
    source install/setup.bash
    ros2 launch takeoff_and_land_ros2 takeoff_land.launch.py
    ```
