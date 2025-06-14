@@ -74,7 +74,7 @@ mavsdk_with_ros2_takeoff_n_land/
    **첫 번째 터미널 (PX4 시뮬레이터)**
    ```bash
    cd ~/PX4-Autopilot
-   px4 make px4_sitl gz_x500
+   make px4_sitl gz_x500
    ```
 
    **두 번째 터미널 (Micro-XRCE-DDS Agent)**
